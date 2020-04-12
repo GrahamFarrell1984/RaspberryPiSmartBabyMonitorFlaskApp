@@ -50,10 +50,9 @@
                 onMessageArrived(data);
                 let BROKER = 'broker.mqttdashboard.com';
                 let PORT = 8000;
-                let PROTOCOL = "/wss"
                 let CLIENTID = 'clientId-pcJQINQ9E7';
                 let SUBSCRIBER = 'GFNCI/PUBLISH';
-                client = new Paho.MQTT.Client(BROKER, PORT, PROTOCOL, CLIENTID);
+                client = new Paho.MQTT.Client(BROKER, PORT, CLIENTID);
                 client.connect({onSuccess:onConnect});
                 client.onMessageArrived = onMessageArrived;
 
