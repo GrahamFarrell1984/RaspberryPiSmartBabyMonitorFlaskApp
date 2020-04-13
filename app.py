@@ -4,7 +4,7 @@ from flask_mqtt import Mqtt
 app = Flask(__name__) # create an app instance of Flask
 
 app.config['MQTT_BROKER_URL'] = 'broker.mqttdashboard.com'
-app.config['MQTT_BROKER_PORT'] = 443
+app.config['MQTT_BROKER_PORT'] = 8000
 app.config['MQTT_USERNAME'] = 'user'
 app.config['MQTT_PASSWORD'] = 'secret'
 app.config['MQTT_REFRESH_TIME'] = 1.0  # refresh time in seconds
@@ -14,7 +14,7 @@ mqtt = Mqtt(app)
 @app.route("/dashboard") # at the endpoint /dashboard
 def get_dashboard(): # call the get_dashboard method
     # mqtt.subscribe('GFNCI/PUBLISH')
-    # mqtt.publish('GFNCI/PUBLISH', 'hello world')
+    mqtt.publish('GFNCI/PUBLISH', 'hello world')
     return render_template('dashboard.html') # return the dashboard.html template
 
 if __name__ == "__main__": # on running python app.py
