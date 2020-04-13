@@ -47,9 +47,10 @@
                 } : localStorage.getItem('data');
                 let data = {'payloadString': JSON.stringify(cache)};
                 onMessageArrived(data);
-                let BROKER = 'broker.mqttdashboard.com';
+                // let BROKER = 'broker.mqttdashboard.com';
+                let BROKER = 'pibaby-monitor-flask-app.herokuapp.com/dashboard';
                 // let PORT = 8000;
-                let PORT = 9001;
+                let PORT = 80;
                 let CLIENTID = 'clientId-pcJQINQ9E7';
                 let SUBSCRIBER = 'GFNCI/PUBLISH';
                 client = new Paho.MQTT.Client(BROKER, PORT, CLIENTID);
