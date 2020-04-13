@@ -11,11 +11,24 @@ app.config['MQTT_REFRESH_TIME'] = 1.0  # refresh time in seconds
 
 mqtt = Mqtt(app)
 
+data=[
+    {
+        'name':'Audrin',
+        'place': 'kaka',
+        'mob': '7736'
+    },
+    {
+        'name': 'Stuvard',
+        'place': 'Goa',
+        'mob' : '546464'
+    }
+]
+
 @app.route("/dashboard") # at the endpoint /dashboard
 def get_dashboard(): # call the get_dashboard method
     # mqtt.subscribe('GFNCI/PUBLISH')
     mqtt.publish('GFNCI/PUBLISH', 'hello world')
-    return render_template('dashboard.html') # return the dashboard.html template
+    return render_template('dashboard.html', data = data) # return the dashboard.html template
 
 if __name__ == "__main__": # on running python app.py
     # app.run(debug=True) # run the flask app in debug mode

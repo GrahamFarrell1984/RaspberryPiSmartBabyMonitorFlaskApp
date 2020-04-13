@@ -36,6 +36,14 @@
         <p id="roomNoiseMessage">---</p>
         <p id="localStorageErrorMessage"></p>
 
+        <ul>
+            {% for item in data %}
+            <li>{{item.name}}</li>
+            <li>{{item.place}}</li>
+            <li>{{item.mob}}</li>
+            {% endfor %}
+        </ul>
+
         <script>
             $(document).ready(function() {
                 let cache = (localStorage.getItem('data') == undefined || localStorage.getItem('data') == null) ? {
