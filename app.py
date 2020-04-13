@@ -28,7 +28,7 @@ mqtt = Mqtt(app)
 def get_dashboard(): # call the get_dashboard method
     # mqtt.subscribe('GFNCI/PUBLISH')
     # mqtt.publish('GFNCI/PUBLISH', 'hello world')
-    return render_template('dashboard.html', data = data) # return the dashboard.html template
+    return render_template('dashboard.html') # return the dashboard.html template
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
