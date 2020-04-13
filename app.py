@@ -11,6 +11,10 @@ app.config['MQTT_REFRESH_TIME'] = 1.0  # refresh time in seconds
 
 mqtt = Mqtt(app)
 
+number = 10
+
+global readings
+
 # data=[
 #     {
 #         'name':'Audrin',
@@ -26,20 +30,29 @@ mqtt = Mqtt(app)
 
 @app.route("/dashboard") # at the endpoint /dashboard
 def get_dashboard(): # call the get_dashboard method
+    print("get_dashboard method called!")
     # mqtt.subscribe('GFNCI/PUBLISH')
     # mqtt.publish('GFNCI/PUBLISH', 'hello world')
-    return render_template('dashboard.html', payload = payload) # return the dashboard.html template
+    return render_template('dashboard.html', readings = readings) # return the dashboard.html template
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
     mqtt.subscribe('GFNCI/PUBLISH')
+    print("Connected!")
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
+    global readings
     data = dict(topic=message.topic, payload=message.payload.decode())
+    readings = dict(payload=message.payload.decode())
+    print("Message received!")
+    print("Payload: " + str(readings))
+    # return render_template('dashboard.html', readings = readings)
+    # print("Payload: " + str(payload))
+
 
 if __name__ == "__main__": # on running python app.py
-    # app.run(debug=True) # run the flask app in debug mode
-    app.run() # run the flask app without debug mode
+    app.run(debug=True) # run the flask app in debug mode
+    # app.run() # run the flask app without debug mode
     # port = int(os.environ.get("PORT", 5000))
     # app.run(host='0.0.0.0', port=port)ate('dashboard.html')

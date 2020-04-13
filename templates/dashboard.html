@@ -36,7 +36,7 @@
         <p id="roomNoiseMessage">---</p>
         <p id="localStorageErrorMessage"></p>
 
-        <p>{{ payload }}</p>
+        <p>{{ readings }}</p>
 
         <!-- <ul>
             {% for item in data %}
@@ -58,12 +58,12 @@
                 let data = {'payloadString': JSON.stringify(cache)};
                 onMessageArrived(data);
                 let BROKER = 'broker.mqttdashboard.com';
-                let PORT = 1883;
+                let PORT = 8000;
                 let CLIENTID = 'clientId-pcJQINQ9E7';
                 let SUBSCRIBER = 'GFNCI/PUBLISH';
                 client = new Paho.MQTT.Client(BROKER, PORT, CLIENTID);
-                client.connect({onSuccess:onConnect, useSSL: true});
-                // client.connect({onSuccess:onConnect});
+                // client.connect({onSuccess:onConnect, useSSL: true});
+                client.connect({onSuccess:onConnect});
                 client.onMessageArrived = onMessageArrived;
 
                 function onConnect() {
