@@ -1,4 +1,5 @@
 from flask import Flask, render_template # import the Flask class and render_template function from the flask module
+import os
 app = Flask(__name__) # create an app instance of Flask
 
 @app.route("/dashboard") # at the endpoint /dashboard
