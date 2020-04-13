@@ -48,14 +48,16 @@
                 let data = {'payloadString': JSON.stringify(cache)};
                 onMessageArrived(data);
                 let BROKER = 'broker.mqttdashboard.com';
-                let PORT = 443;
+                let PORT = 8000;
                 let CLIENTID = 'clientId-pcJQINQ9E7';
                 let SUBSCRIBER = 'GFNCI/PUBLISH';
                 client = new Paho.MQTT.Client(BROKER, PORT, CLIENTID);
-                client.connect({onSuccess:onConnect, useSSL: true});
+                // client.connect({onSuccess:onConnect, useSSL: true});
+                client.connect({onSuccess:onConnect});
                 client.onMessageArrived = onMessageArrived;
 
                 function onConnect() {
+                    console.log("Connected successfully!");
                     client.subscribe(SUBSCRIBER);
                 }
 
