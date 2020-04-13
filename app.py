@@ -8,6 +8,6 @@ def get_dashboard(): # call the get_dashboard method
 
 if __name__ == "__main__": # on running python app.py
     # app.run(debug=True) # run the flask app in debug mode
-    # app.run() # run the flask app without debug mode
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run() # run the flask app without debug mode
+    # port = int(os.environ.get("PORT", 5000))
+    # app.run(host='0.0.0.0', port=port)
