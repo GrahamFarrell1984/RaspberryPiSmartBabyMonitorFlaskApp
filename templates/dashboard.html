@@ -36,13 +36,15 @@
         <p id="roomNoiseMessage">---</p>
         <p id="localStorageErrorMessage"></p>
 
-        <ul>
+        <p>{% payload %}</p>
+
+        <!-- <ul>
             {% for item in data %}
             <li>{{item.name}}</li>
             <li>{{item.place}}</li>
             <li>{{item.mob}}</li>
             {% endfor %}
-        </ul>
+        </ul> -->
 
         <script>
             $(document).ready(function() {
