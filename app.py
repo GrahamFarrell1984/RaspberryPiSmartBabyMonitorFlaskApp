@@ -11,9 +11,9 @@ app.config['MQTT_REFRESH_TIME'] = 1.0  # refresh time in seconds
 
 # Parameters for SSL enabled
 app.config['MQTT_BROKER_PORT'] = 8883
-app.config['MQTT_TLS_ENABLED'] = True
-app.config['MQTT_TLS_INSECURE'] = True
-app.config['MQTT_TLS_CA_CERTS'] = 'ca.crt'
+# app.config['MQTT_TLS_ENABLED'] = True
+# app.config['MQTT_TLS_INSECURE'] = True
+# app.config['MQTT_TLS_CA_CERTS'] = 'ca.crt'
 
 mqtt = Mqtt(app)
 
