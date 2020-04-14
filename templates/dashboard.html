@@ -18,6 +18,39 @@
                     $('#temperatureTableData').text(data.temperature);
                     $('#motionTableData').text(data.motion);
                     $('#humidityTableData').text(data.humidity);
+
+                    /* Check for room temperature being too hot or too cold. Optimum temperature for the baby is between 20 and 22 degrees Celsius */
+
+                    if(data.temperature < 20) {
+                        document.getElementById("roomTemperatureMessage").innerHTML = "Warning, the baby room is too cold!";
+                    } else if (data.temperature > 22) {
+                        document.getElementById("roomTemperatureMessage").innerHTML = "Warning, the baby room is too hot!";
+                    } else {
+                        document.getElementById("roomTemperatureMessage").innerHTML = "The baby room temperature is just right.";
+                    }
+
+                    /* Check for room being too bright or too dark depending on the the sleep time of the baby being 7pm */
+
+                    var date = new Date();
+                    var hours = date.getHours();
+                    if (hours >= 19) {
+                        if (data.light > 50) {
+                            document.getElementById("roomBrightnessMessage").innerHTML = "Room is too bright!";
+                        } else {
+                            document.getElementById("roomBrightnessMessage").innerHTML = "Room brightness is just right.";
+                        }
+
+                    } else {
+                        document.getElementById("roomBrightnessMessage").innerHTML = "It isn't bed time yet. Room brightness is okay.";
+                    }
+
+                    /* Check for noise levels being too high */
+
+                    if(data.sound > 250) {
+                        document.getElementById("roomNoiseMessage").innerHTML = "Warning, there is too much noise in the house!";
+                    } else {
+                        document.getElementById("roomNoiseMessage").innerHTML = "Noise levels in the house are okay.";
+                    }
                 });
             };
         </script>
