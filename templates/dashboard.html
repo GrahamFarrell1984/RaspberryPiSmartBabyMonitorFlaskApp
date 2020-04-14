@@ -10,7 +10,7 @@
             var intervalID = setInterval(updateValues, 15000);
             var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
             function updateValues() {
-                $.getJSON($SCRIPT_ROOT + '/update_parameters',
+                $.getJSON($SCRIPT_ROOT + '/_update_parameters',
                 function(data) {
                     console.log("updateValues() function called!");
                     $('#soundTableData').text(data.sound);
