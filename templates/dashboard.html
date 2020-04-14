@@ -7,7 +7,7 @@
         <script src="https://kit.fontawesome.com/026028e2f6.js" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script type="text/javascript">
-            var intervalID = setInterval(update_values, 15000);
+            var intervalID = setInterval(updateValues, 15000);
             var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
             function updateValues() {
                 $.getJSON($SCRIPT_ROOT + '/update_parameters',
