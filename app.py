@@ -12,8 +12,8 @@ app.config['MQTT_REFRESH_TIME'] = 1.0  # refresh time in seconds
 
 mqtt = Mqtt(app)
 
-sound = 20
-light = 30
+sound = 0
+light = 0
 motion = 0
 temperature = 0
 humidity = 0
@@ -58,8 +58,8 @@ def handle_mqtt_message(client, userdata, message):
 
     print('Temperature=%s' % temperature)
 
-@app.route('/_stuff', methods = ['GET'])
-def stuff():
+@app.route('/_update_parameters', methods = ['GET'])
+def update_parameters():
 
     global sound
     global light
