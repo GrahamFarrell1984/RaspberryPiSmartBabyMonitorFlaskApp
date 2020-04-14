@@ -9,10 +9,10 @@
         <script type="text/javascript">
             var intervalID = setInterval(update_values, 15000);
             var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-            function update_values() {
+            function updateValues() {
                 $.getJSON($SCRIPT_ROOT + '/update_parameters',
                 function(data) {
-                    console.log("AJAX!!!!!");
+                    console.log("updateValues() function called!");
                     $('#soundTableData').text(data.sound);
                     $('#lightTableData').text(data.light);
                     $('#temperatureTableData').text(data.temperature);
@@ -22,7 +22,7 @@
             };
         </script>
     </head>
-    <body onload="update_values()">
+    <body onload="updateValues()">
         <h1>Raspberry Pi Smart Baby Monitor <i class="fas fa-baby"></i><i class="fab fa-raspberry-pi"></i></h1>
 
         <table>
