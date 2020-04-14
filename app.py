@@ -1,5 +1,6 @@
-from flask import Flask, render_template # import the Flask class and render_template function from the flask module
+from flask import Flask, render_template, jsonify # import the Flask class and render_template function from the flask module
 from flask_mqtt import Mqtt
+import json
 
 app = Flask(__name__) # create an app instance of Flask
 
@@ -11,29 +12,16 @@ app.config['MQTT_REFRESH_TIME'] = 1.0  # refresh time in seconds
 
 mqtt = Mqtt(app)
 
-number = 10
-
-global readings
-
-# data=[
-#     {
-#         'name':'Audrin',
-#         'place': 'kaka',
-#         'mob': '7736'
-#     },
-#     {
-#         'name': 'Stuvard',
-#         'place': 'Goa',
-#         'mob' : '546464'
-#     }
-# ]
+sound = 20
+light = 30
+motion = 0
+temperature = 0
+humidity = 0
 
 @app.route("/dashboard") # at the endpoint /dashboard
 def get_dashboard(): # call the get_dashboard method
     print("get_dashboard method called!")
-    # mqtt.subscribe('GFNCI/PUBLISH')
-    # mqtt.publish('GFNCI/PUBLISH', 'hello world')
-    return render_template('dashboard.html', readings = readings) # return the dashboard.html template
+    return render_template('dashboard.html')
 
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
@@ -42,17 +30,45 @@ def handle_connect(client, userdata, flags, rc):
 
 @mqtt.on_message()
 def handle_mqtt_message(client, userdata, message):
-    global readings
-    data = dict(topic=message.topic, payload=message.payload.decode())
-    readings = dict(payload=message.payload.decode())
-    print("Message received!")
-    print("Payload: " + str(readings))
-    # return render_template('dashboard.html', readings = readings)
-    # print("Payload: " + str(payload))
 
+    global sound
+    global light
+    global motion
+    global temperature
+    global humidity
+
+    str_message = str(message.payload.decode('utf-8'))
+    print('Message received=%s' % str_message)
+    message = json.loads(str_message)
+    print('Message=%s' % message)
+
+    sound = message.get('sound')
+    light = message.get('light')
+    humidity = message.get('humidity')
+    motion = message.get('motion')
+    temperature = message.get('temperature')
+
+    print('Sound=%s' % sound)
+
+    print('Light=%s' % light)
+
+    print('Humidity=%s' % humidity)
+
+    print('Motion=%s' % motion)
+
+    print('Temperature=%s' % temperature)
+
+@app.route('/_stuff', methods = ['GET'])
+def stuff():
+
+    global sound
+    global light
+    global motion
+    global temperature
+    global humidity
+
+    return jsonify(sound = sound, light = light, motion = motion, temperature = temperature, humidity = humidity)
 
 if __name__ == "__main__": # on running python app.py
     app.run(debug=True) # run the flask app in debug mode
     # app.run() # run the flask app without debug mode
-    # port = int(os.environ.get("PORT", 5000))
-    # app.run(host='0.0.0.0', port=port)ate('dashboard.html')
